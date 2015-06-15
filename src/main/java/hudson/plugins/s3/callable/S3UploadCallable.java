@@ -109,6 +109,7 @@ public class S3UploadCallable extends AbstractS3Callable implements FileCallable
             }
             AccessControlList acl = new AccessControlList();           
         	acl.grantPermission(GroupGrantee.AuthenticatedUsers, Permission.FullControl);
+            acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
             final PutObjectRequest request = new PutObjectRequest(dest.bucketName, dest.objectName, localFile).withAccessControlList(acl)
                 .withMetadata(buildMetadata(file));
             final PutObjectResult result = getClient().putObject(request);
